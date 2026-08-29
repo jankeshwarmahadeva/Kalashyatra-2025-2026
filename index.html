@@ -16,8 +16,8 @@
     --paper:#fffdf8; 
     --ink:#2d241c; 
     --muted:#766a5d;
-    --accent:#7a1c1c; /* मैरून रंग */
-    --accent2:#992424; /* गहरा मैरून */
+    --accent:#7a1c1c; 
+    --accent2:#992424; 
     --line:#e7dccb; 
     --green:#47634b;
     --red:#a14444;
@@ -39,27 +39,51 @@ body{
     color: var(--ink);
 }
 
-
 /* =========================
-   HERO
+   HERO SLIDER
 ========================= */
 
 .hero{
     min-height:72vh;
-    background:
-    linear-gradient(
-        rgba(45,36,28,.3),
-        rgba(45,36,28,.8)
-    ),
-    url("2026.jpg") center/cover no-repeat;
+    position: relative;
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
     color:white;
+    overflow: hidden;
+}
+
+.hero-slider {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(45,36,28,.4), rgba(45,36,28,.85));
+    z-index: 2;
 }
 
 .hero-content{
+    position: relative;
+    z-index: 3;
     padding:25px;
 }
 
@@ -67,9 +91,9 @@ body{
     width:95px;
     height:95px;
     border-radius:50%;
-    object-fit:contain;
+    object-fit:cover;
     background:white;
-    padding:5px;
+    padding:4px;
     margin-bottom:18px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
@@ -112,7 +136,6 @@ body{
     background: var(--accent2);
 }
 
-
 /* =========================
    PROGRAMS
 ========================= */
@@ -154,9 +177,6 @@ body{
     gap:25px;
 }
 
-
-/* PROGRAM CARD & ANIMATIONS (1080p Image Responsive Fix) */
-
 .program-card{
     background:var(--paper);
     border-radius:18px;
@@ -178,17 +198,6 @@ body{
     object-fit: cover;
     object-position: center;
     display:block;
-    transform:scale(1);
-    transition: transform .6s cubic-bezier(.2,.7,.2,1);
-}
-
-.program-card.center-focus img{
-    transform:scale(1.055);
-}
-
-.program-card.center-focus{
-    transform:translateY(-4px);
-    box-shadow: 0 17px 38px rgba(122,28,28,.17);
 }
 
 .program-info{
@@ -214,9 +223,8 @@ body{
     font-family: Arial, sans-serif;
 }
 
-
 /* =========================
-   MODAL (SHEET)
+   MODAL
 ========================= */
 
 .modal{
@@ -238,11 +246,6 @@ body{
     background:var(--bg);
     min-height:100vh;
 }
-
-
-/* =========================
-   TOP BAR
-========================= */
 
 .topbar{
     position:sticky;
@@ -280,11 +283,6 @@ body{
     gap:8px;
 }
 
-
-/* =========================
-   ACCOUNT HEADER (1080p Image Auto Fit)
-========================= */
-
 .account-header{
     background:var(--paper);
     border-bottom: 1px solid var(--line);
@@ -319,21 +317,26 @@ body{
     text-transform: uppercase;
 }
 
-
-/* =========================
-   ACCOUNT CONTENT
-========================= */
+/* 5 लाख 7 लाख घोटाला पतला सेक्शन */
+.scam-strip {
+    background: #f8eaea;
+    border: 1px dashed var(--accent);
+    color: var(--accent);
+    text-align: center;
+    padding: 10px 15px;
+    margin: 15px 24px 0;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: .03em;
+}
 
 .account-content{
     padding:20px 16px 50px;
     max-width: 980px;
     margin: auto;
 }
-
-
-/* =========================
-   SECRET DONATION
-========================= */
 
 .secret{
     background:#fcf3f3;
@@ -372,11 +375,6 @@ body{
     line-height:1.8;
     font-family: Arial, sans-serif;
 }
-
-
-/* =========================
-   TOTAL BOXES (SUMMARY)
-========================= */
 
 .totals{
     display:grid;
@@ -417,11 +415,6 @@ body{
     color:var(--accent);
 }
 
-
-/* =========================
-   SECTIONS
-========================= */
-
 .account-section{
     background:var(--paper);
     border:1px solid var(--line);
@@ -448,11 +441,6 @@ body{
     margin:10px auto 0;
 }
 
-
-/* =========================
-   DONOR LIST (Bold for 1000+ & Clean Single Line)
-========================= */
-
 .donor-list{
     display:flex;
     flex-direction:column;
@@ -470,10 +458,6 @@ body{
 
 .donor-row:last-child{
     border-bottom:0;
-}
-
-.donor-name {
-    font-weight: 400;
 }
 
 .donor-name.bold-donor {
@@ -502,11 +486,6 @@ body{
     letter-spacing: 1px;
 }
 
-
-/* =========================
-   SMALL DONORS
-========================= */
-
 .compact-donors{
     background:var(--paper);
     border:1px solid var(--line);
@@ -534,16 +513,6 @@ body{
     color: var(--accent);
 }
 
-
-/* =========================
-   EXPENSE LIST
-========================= */
-
-.expense-list{
-    display:flex;
-    flex-direction:column;
-}
-
 .expense-row{
     display:flex;
     justify-content:space-between;
@@ -556,10 +525,6 @@ body{
 
 .expense-row:last-child{
     border-bottom:0;
-}
-
-.expense-name{
-    font-size:14px;
 }
 
 .expense-amount{
@@ -579,11 +544,6 @@ body{
     font-size:18px;
     font-family: Arial, sans-serif;
 }
-
-
-/* =========================
-   FINAL BALANCE
-========================= */
 
 .final-box{
     background:var(--paper);
@@ -617,11 +577,6 @@ body{
     color:var(--ink);
 }
 
-
-/* =========================
-   NOTE
-========================= */
-
 .note{
     background:var(--paper);
     border:1px solid var(--line);
@@ -642,16 +597,6 @@ body{
     font-size: 16px;
 }
 
-
-/* =========================
-   COMMITTEE
-========================= */
-
-.committee{
-    display:flex;
-    flex-direction:column;
-}
-
 .committee-row{
     display:flex;
     padding:12px 4px;
@@ -665,7 +610,7 @@ body{
 }
 
 .committee-role{
-    width:160px;
+    width:200px;
     font-weight:700;
     color: var(--accent);
 }
@@ -674,23 +619,11 @@ body{
     color:var(--ink);
 }
 
-
-/* =========================
-   SHARE
-========================= */
-
 .share-area{
     text-align:center;
     margin-top:30px;
     padding-top:25px;
     border-top:1px solid var(--line);
-}
-
-.share-area p{
-    color:var(--muted);
-    font-size:13px;
-    margin-bottom:12px;
-    font-family: Arial, sans-serif;
 }
 
 .share-btn{
@@ -704,13 +637,7 @@ body{
     font-family: Arial, sans-serif;
     font-size: 14px;
     box-shadow: 0 4px 15px rgba(122,28,28,0.3);
-    transition: background 0.2s;
 }
-
-.share-btn:hover{
-    background: var(--accent2);
-}
-
 
 /* =========================
    FOOTER
@@ -724,18 +651,22 @@ footer{
 }
 
 .footer-logo{
-    width:60px;
-    height:60px;
+    width:65px;
+    height:65px;
     background:#fff;
     border-radius:50%;
-    padding:4px;
-    margin:auto auto 10px;
+    margin:0 auto 12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 
 .footer-logo img{
     width:100%;
     height:100%;
-    object-fit:contain;
+    object-fit:cover;
 }
 
 footer h3{
@@ -797,11 +728,6 @@ footer p{
     font-family: Arial, sans-serif;
 }
 
-
-/* =========================
-   TOAST
-========================= */
-
 .toast{
     position:fixed;
     bottom:20px;
@@ -824,35 +750,26 @@ footer p{
     opacity:1;
 }
 
-
-/* =========================
-   MOBILE
-========================= */
-
 @media(max-width:700px){
-    .program-grid{
-        grid-template-columns:1fr;
-    }
-    .totals{
-        grid-template-columns:1fr;
-    }
-    .committee-row{
-        display:block;
-    }
-    .committee-role{
-        width:auto;
-        margin-bottom:2px;
-    }
+    .program-grid{grid-template-columns:1fr;}
+    .totals{grid-template-columns:1fr;}
+    .committee-row{display:block;}
+    .committee-role{width:auto;margin-bottom:2px;}
 }
 
 </style>
 </head>
 
-
 <body>
 
-<!-- HERO -->
+<!-- HERO WITH SLIDER -->
 <section class="hero">
+    <div class="hero-slider">
+        <div class="hero-slide active" style="background-image: url('Mahadev-big.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('Mahadev-big1.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('Mahadev-big2.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('Mahadev-big3.jpg');"></div>
+    </div>
     <div class="hero-content">
         <img src="logo.jpg" class="logo" alt="श्री जनकेश्वर महादेव">
         <div class="om">ॐ</div>
@@ -871,7 +788,6 @@ footer p{
     </div>
 
     <div class="program-grid">
-        <!-- 2025 -->
         <div class="program-card" onclick="openProgram('2025')">
             <img src="2025.jpg" alt="कलश यात्रा 2025">
             <div class="program-info">
@@ -881,7 +797,6 @@ footer p{
             </div>
         </div>
 
-        <!-- 2026 -->
         <div class="program-card" onclick="openProgram('2026')">
             <img src="2026.jpg" alt="कलश यात्रा 2026">
             <div class="program-info">
@@ -955,13 +870,13 @@ const data = {
         ["तेल",110],["अतिथि स्वागत (VIPul)",130],["कपड़ा (झड़ा)",130],["तेल",100],["कार्ड (Invitation)",40],["लिफाफा",10],["रूवावजा",1000],["रूपेश भगत - चीनी के लिए",2000],["बेसन रिफाइण्ड, गिलास, फल",8500],["डीजल",8000],["तेल",100],["तेल",200],["फुल माला के लिए",1000],["बुनिया सामान",3990],["आलू मिर्च",120],["परोस परोरा",80],["काला हिट",330],["पार्टी स्प्रे",140],["काला हिट",220],["अलारोट",260],["चीनी",225],["झाकि टीम नाश्ता",90],["पेट्रोल",200],["खीर चावल",120],["खीर मटेरियल",110],
         ["फेबीकिट",25],["लाईटर",10],["झाकि टीम",17500],["टेन्ट",4000],["सिलेण्डर",1000],["ब्राह्मण दक्षिणा",3000],["सम्पूर्ण पुजा सामान व चदावा",3000],["इनाम",500],["नाश्ता",600],["गमिछा",160],["पानी बोतल",170],["चालान (जो ट्राली बुकिंग के समय कटा था)",500],["ट्राली का बाकी पेमेंट",2200]
     ],
-    note:"समान वापसी करने पर मुझे कुल ₹5,090 रुपये मिले, जिसमें से ₹1,400 के दो नए चोंगा लिए गए।",
+    note:"समान वापसी करने पर मुझे कुल ₹5,090 रुपये मिले, जिसमें से ₹1,400 के दो नए चोंगा लिए गए। साथ ही 800 का रुवावजा वापस हुआ जिसका पैसा मुझे नहीं मिला।",
     committee:[
         ["अध्यक्ष","अभय तिवारी"],
         ["उपाध्यक्ष","पवन सिंह"],
         ["कोषाध्यक्ष","गुलशन गुप्ता"],
-        ["सचिव","धनंजय"],
-        ["सुरक्षा प्रमुख", "कुंदन बाबू व चंदन सिंह"]
+        ["सचिव / महासचिव","कुंदन बाबू और धनंजय प्रसाद"],
+        ["सुरक्षा / सेवा प्रमुख", "चंदन एवं ग्राम वासी"]
     ]
 },
 "2026":{
@@ -983,25 +898,19 @@ const data = {
     note:"2026 के हिसाब के अनुसार कुल प्राप्त राशि ₹17,964, कुल खर्च ₹11,750 और बची हुई राशि ₹6,214 है।",
     committee:[
         ["अध्यक्ष","गुलशन गुप्ता"],
-        ["संपूर्ण सहयोगकर्ता", "धनंजय प्रसाद और कुंदन बाबू"]
+        ["सचिव / महासचिव","कुंदन बाबू और धनंजय प्रसाद"],
+        ["संपूर्ण सेवा प्रमुख", "चंदन एवं ग्राम वासी"]
     ]
 }
 };
 
 function money(number){
-    if(number === null || number === undefined){
-        return "राशि अंकित नहीं";
-    }
+    if(number === null || number === undefined) return "राशि अंकित नहीं";
     return "₹" + Number(number).toLocaleString("en-IN");
 }
 
 function escapeHTML(text){
-    return String(text)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+    return String(text).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
 }
 
 let currentYear="";
@@ -1021,62 +930,30 @@ function openProgram(year){
     special.sort((a,b)=>b[1]-a[1]);
 
     let majorHTML="";
-
-    // Special Donors (Bold & Highlighted)
     special.forEach((item,index)=>{
-        majorHTML += `
-        <div class="donor-row">
-            <div class="donor-name bold-donor">
-                ${index+1}. ${escapeHTML(item[0])}
-            </div>
-            <div class="donor-amount bold-amount">
-                ${money(item[1])}
-            </div>
-        </div>`;
+        majorHTML += `<div class="donor-row"><div class="donor-name bold-donor">${index+1}. ${escapeHTML(item[0])}</div><div class="donor-amount bold-amount">${money(item[1])}</div></div>`;
     });
 
-    // 1000 and Above Donors (Bold name and amount)
     donors.forEach(item=>{
         if(item[1] !== null && item[1] >= 1000){
-            majorHTML += `
-            <div class="donor-row">
-                <div class="donor-name bold-donor">
-                    ${escapeHTML(item[0])}
-                </div>
-                <div class="donor-amount bold-amount">
-                    ${money(item[1])}
-                </div>
-            </div>`;
+            majorHTML += `<div class="donor-row"><div class="donor-name bold-donor">${escapeHTML(item[0])}</div><div class="donor-amount bold-amount">${money(item[1])}</div></div>`;
         }
     });
 
-    // Small Donors (Under 1000)
     const small = donors.filter(item => item[1] === null || item[1] < 1000);
     let smallHTML="";
     small.forEach(item=>{
-        smallHTML += `
-        <div class="compact-item">
-            <span>${escapeHTML(item[0])}</span>
-            <strong>${money(item[1])}</strong>
-        </div>`;
+        smallHTML += `<div class="compact-item"><span>${escapeHTML(item[0])}</span><strong>${money(item[1])}</strong></div>`;
     });
 
     let expenseHTML="";
     d.expenses.forEach((item,index)=>{
-        expenseHTML += `
-        <div class="expense-row">
-            <div class="expense-name">${index+1}. ${escapeHTML(item[0])}</div>
-            <div class="expense-amount">${money(item[1])}</div>
-        </div>`;
+        expenseHTML += `<div class="expense-row"><div class="expense-name">${index+1}. ${escapeHTML(item[0])}</div><div class="expense-amount">${money(item[1])}</div></div>`;
     });
 
     let committeeHTML="";
     d.committee.forEach(item=>{
-        committeeHTML += `
-        <div class="committee-row">
-            <div class="committee-role">${escapeHTML(item[0])}</div>
-            <div class="committee-name">${escapeHTML(item[1])}</div>
-        </div>`;
+        committeeHTML += `<div class="committee-row"><div class="committee-role">${escapeHTML(item[0])}</div><div class="committee-name">${escapeHTML(item[1])}</div></div>`;
     });
 
     document.getElementById("account").innerHTML = `
@@ -1084,11 +961,53 @@ function openProgram(year){
         <img src="${d.image}" alt="${escapeHTML(d.title)}">
         <div class="account-heading">
             <h1>${escapeHTML(d.title)}</h1>
-            <p>5 लाख 7 लाख चंदे का घोटाले का लिस्ट</p>
+            <p>श्री जनकेश्वर महादेव समिति</p>
         </div>
     </div>
 
+    <!-- 5 लाख 7 लाख घोटाले का बोल्ड सेक्शन -->
+    <div class="scam-strip">
+        5 लाख 7 लाख चंदे का घोटाले का लिस्ट
+    </div>
+
     <div class="account-content">
+        <!-- SECRET -->
+        <div class="secret">
+            <div class="secret-top">विशेष विवरण</div>
+            <h2>🔒 गुप्त दान</h2>
+            <div class="secret-amount">${money(d.secret.amount)}</div>
+            <div class="secret-names">${d.secret.names.map(escapeHTML).join(" • ")}</div>
+        </div>
+
+        <!-- DONORS -->
+        <section class="account-section">
+            <div class="section-heading">
+                <h2>चंदा विवरण सूची</h2>
+            </div>
+            <div class="major-label">प्रमुख दानदाता — ₹1,000 एवं उससे अधिक</div>
+            <div class="donor-list">${majorHTML}</div>
+        </section>
+
+        <!-- SMALL DONORS -->
+        <section class="account-section">
+            <div class="section-heading">
+                <h2>अन्य सहयोगकर्ता</h2>
+            </div>
+            <div class="compact-donors">${smallHTML}</div>
+        </section>
+
+        <!-- EXPENSE -->
+        <section class="account-section">
+            <div class="section-heading">
+                <h2>पूरा खर्च विवरण</h2>
+            </div>
+            <div class="expense-list">${expenseHTML}</div>
+            <div class="expense-total">
+                <span>कुल खर्च</span>
+                <span>${money(d.expensesTotal)}</span>
+            </div>
+        </section>
+
         <!-- TOTALS -->
         <div class="totals">
             <div class="total received">
@@ -1105,54 +1024,11 @@ function openProgram(year){
             </div>
         </div>
 
-        <!-- SECRET -->
-        <div class="secret">
-            <div class="secret-top">विशेष विवरण</div>
-            <h2>🔒 गुप्त दान</h2>
-            <div class="secret-amount">${money(d.secret.amount)}</div>
-            <div class="secret-names">${d.secret.names.map(escapeHTML).join(" • ")}</div>
-        </div>
-
-        <!-- DONORS -->
-        <section class="account-section">
-            <div class="section-heading">
-                <h2>चंदा विवरण सूची</h2>
-            </div>
-            <div class="major-label">प्रमुख दानदाता — ₹1,000 एवं उससे अधिक</div>
-            <div class="donor-list">
-                ${majorHTML}
-            </div>
-        </section>
-
-        <!-- SMALL DONORS -->
-        <section class="account-section">
-            <div class="section-heading">
-                <h2>अन्य सहयोगकर्ता</h2>
-            </div>
-            <div class="compact-donors">
-                ${smallHTML}
-            </div>
-        </section>
-
-        <!-- EXPENSE -->
-        <section class="account-section">
-            <div class="section-heading">
-                <h2>पूरा खर्च विवरण</h2>
-            </div>
-            <div class="expense-list">
-                ${expenseHTML}
-            </div>
-            <div class="expense-total">
-                <span>कुल खर्च</span>
-                <span>${money(d.expensesTotal)}</span>
-            </div>
-        </section>
-
         <!-- FINAL -->
         <div class="final-box">
             <div class="final-small">अंतिम हिसाब</div>
             <div class="final-amount">${money(d.balance)}</div>
-            <div class="other-expenses">सुरक्षित शेष राशि</div>
+            <div class="other-expenses">अन्य छोटे-मोटे खर्चे</div>
         </div>
 
         <!-- NOTE -->
@@ -1166,9 +1042,7 @@ function openProgram(year){
             <div class="section-heading">
                 <h2>प्रमुख व्यक्ति एवं समिति</h2>
             </div>
-            <div class="committee">
-                ${committeeHTML}
-            </div>
+            <div class="committee">${committeeHTML}</div>
         </section>
 
         <!-- SHARE -->
@@ -1197,8 +1071,8 @@ async function shareProgram(){
     const url = location.origin + location.pathname + "#" + currentYear;
     const shareData={
         title: "श्री जनकेश्वर महादेव — " + currentYear,
-        text: `${d.title}\nकुल चंदा: ${money(d.received)}\nकुल खर्च: ${money(d.expensesTotal)}\nबचा हुआ: ${money(d.balance)}`,
-        url:url
+        text: `${d.title} | श्री जनकेश्वर महादेव\nकुल चंदा: ${money(d.received)}\nकुल खर्च: ${money(d.expensesTotal)}\nबचा हुआ: ${money(d.balance)}`,
+        url: url
     };
     try{
         if(navigator.share){
@@ -1218,63 +1092,113 @@ async function downloadPDF(){
     const {jsPDF}=window.jspdf;
     const doc=new jsPDF({ unit:"mm", format:"a4" });
 
-    doc.setFontSize(20);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
     doc.text("Shri Jankeshwar Mahadev", 105, 15, { align:"center" });
-    doc.setFontSize(14);
-    doc.text(`Kalash Yatra ${currentYear}`, 105, 23, { align:"center" });
+    doc.setFontSize(13);
+    doc.text(d.title, 105, 22, { align:"center" });
 
     try{
         const image = await getImageData(d.image);
-        doc.addImage(image, "JPEG", 20, 30, 170, 72);
+        doc.addImage(image, "JPEG", 20, 27, 170, 70);
     }catch(error){
         console.log(error);
     }
 
-    doc.setFontSize(11);
-    doc.text(`Total Received: ${money(d.received)}`, 20, 112);
-    doc.text(`Total Expenses: ${money(d.expensesTotal)}`, 20, 119);
-    doc.text(`Bacha Hua: ${money(d.balance)}`, 20, 126);
+    let startY = 103;
 
-    let rows = [...d.donors].sort((a,b)=>{
+    if(d.secret){
+        doc.setFontSize(11);
+        doc.text(`Gupt Daan: ${money(d.secret.amount)} (${d.secret.names.join(", ")})`, 20, startY);
+        startY += 8;
+    }
+
+    let rows = [];
+    if(d.special){
+        d.special.forEach((item, index) => {
+            rows.push([index + 1, item[0] + " (विशेष)", money(item[1])]);
+        });
+    }
+
+    let sortedDonors = [...d.donors].sort((a,b)=>{
         if(a[1]===null) return 1;
         if(b[1]===null) return -1;
         return b[1]-a[1];
-    }).map((item,index)=>[
-        index+1,
-        item[0],
-        item[1]===null ? "राशि अंकित नहीं" : money(item[1])
-    ]);
+    });
+
+    sortedDonors.forEach((item,index)=>{
+        rows.push([
+            rows.length + 1,
+            item[0],
+            item[1]===null ? "राशि अंकित नहीं" : money(item[1])
+        ]);
+    });
 
     doc.autoTable({
-        startY:135,
-        head:[["क्र.", "नाम", "राशि"]],
+        startY: startY,
+        head:[["क्र.", "दानदाता का नाम", "राशि"]],
         body:rows,
         theme:"grid",
-        styles:{ fontSize:7 }
+        styles:{ fontSize:8, font: "helvetica" },
+        headStyles:{ fillColor:[122, 28, 28] }
     });
 
     let y = doc.lastAutoTable.finalY + 10;
+    doc.setFontSize(12);
+    doc.text("पूरा खर्च विवरण", 20, y);
+
     let expenseRows = d.expenses.map((item,index)=>[
         index+1,
         item[0],
         money(item[1])
     ]);
 
-    doc.setFontSize(13);
-    doc.text("पूरा खर्च विवरण", 20, y);
     doc.autoTable({
-        startY:y+4,
-        head:[["क्र.", "खर्च", "राशि"]],
+        startY: y + 4,
+        head:[["क्र.", "खर्च का विवरण", "राशि"]],
         body:expenseRows,
         theme:"grid",
-        styles:{ fontSize:7 }
+        styles:{ fontSize:8, font: "helvetica" },
+        headStyles:{ fillColor:[122, 28, 28] }
     });
 
     y = doc.lastAutoTable.finalY + 10;
-    doc.setFontSize(11);
+    doc.setFontSize(10);
     doc.text(`कुल खर्च: ${money(d.expensesTotal)}`, 20, y);
-    doc.text(`बचा हुआ: ${money(d.balance)}`, 20, y+7);
+    doc.text(`बचा हुआ शेष: ${money(d.balance)}`, 20, y + 6);
+    doc.text(`अंतिम हिसाब - अन्य छोटे-मोटे खर्चे`, 20, y + 12);
 
+    if(d.note){
+        y += 18;
+        doc.text(`नोट: ${d.note}`, 20, y, { maxWidth: 170 });
+    }
+
+    y += 10;
+    doc.text("प्रमुख व्यक्ति एवं समिति:", 20, y);
+    d.committee.forEach((item, idx) => {
+        y += 6;
+        doc.text(`${item[0]}: ${item[1]}`, 25, y);
+    });
+
+    // PDF जनरेट होते ही मोबाइल का Share/Download प्रॉम्प्ट ओपन करना
+    const pdfOutput = doc.output("blob");
+    const pdfFile = new File([pdfOutput], `Shri-Jankeshwar-Mahadev-${currentYear}.pdf`, { type: "application/pdf" });
+    
+    if(navigator.canShare && navigator.canShare({ files: [pdfFile] })){
+        try {
+            await navigator.share({
+                title: `${d.title} — आय व्यय रिपोर्ट`,
+                text: `श्री जनकेश्वर महादेव ${currentYear} की रिपोर्ट PDF देखें।`,
+                files: [pdfFile]
+            });
+            showToast("PDF शेयर हो गई");
+            return;
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    // अगर डायरेक्ट शेयर सपोर्ट न हो तो डिवाइस में डाउनलोड हो जाएगा
     doc.save(`Shri-Jankeshwar-Mahadev-${currentYear}.pdf`);
     showToast("PDF तैयार हो गई");
 }
@@ -1300,41 +1224,26 @@ function showToast(text){
     const toast = document.getElementById("toast");
     toast.textContent = text;
     toast.classList.add("show");
-    setTimeout(()=>{
-        toast.classList.remove("show");
-    }, 2300);
+    setTimeout(()=>{ toast.classList.remove("show"); }, 2300);
 }
 
 document.addEventListener("keydown", event=>{
-    if(event.key === "Escape" && currentYear){
-        closeProgram();
-    }
+    if(event.key === "Escape" && currentYear){ closeProgram(); }
 });
 
-// Card center focus animation script
-const cards = document.querySelectorAll(".program-card");
-function updateCardFocus(){
-    const center = window.innerHeight / 2;
-    cards.forEach(card=>{
-        const rect = card.getBoundingClientRect();
-        const cardCenter = rect.top + rect.height / 2;
-        const distance = Math.abs(center - cardCenter);
-        if(distance < window.innerHeight * .24){
-            card.classList.add("center-focus");
-        }else{
-            card.classList.remove("center-focus");
-        }
-    });
+const slides = document.querySelectorAll(".hero-slide");
+let currentSlide = 0;
+if(slides.length > 0){
+    setInterval(() => {
+        slides[currentSlide].classList.remove("active");
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add("active");
+    }, 4000);
 }
-window.addEventListener("scroll", updateCardFocus, {passive:true});
-window.addEventListener("resize", updateCardFocus);
-window.addEventListener("load", updateCardFocus);
 
 window.addEventListener("load", ()=>{
     const hash = location.hash.replace("#","");
-    if(data[hash]){
-        openProgram(hash);
-    }
+    if(data[hash]){ openProgram(hash); }
 });
 
 </script>
