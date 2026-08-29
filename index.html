@@ -138,7 +138,7 @@ body{
 }
 
 /* =========================
-   PROGRAMS (With Light Shadow & Animation)
+   PROGRAMS
 ========================= */
 
 .container{
@@ -184,7 +184,6 @@ body{
     overflow:hidden;
     cursor:pointer;
     border: 1px solid var(--line);
-    /* Light shadow added and smooth transition for animation */
     box-shadow: 0 4px 20px rgba(45,36,28,0.08);
     transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -285,7 +284,6 @@ body{
     gap:8px;
 }
 
-/* Maroon background removed from modal header, replaced with clean light style */
 .account-header{
     background: #fffdf8; 
     border-bottom: 1px solid var(--line);
@@ -867,7 +865,7 @@ const data = {
         ["फेबीकिट",25],["लाईटर",10],["झाकि टीम",17500],["टेन्ट",4000],["सिलेण्डर",1000],["ब्राह्मण दक्षिणा",3000],["सम्पूर्ण पुजा सामान व चदावा",3000],["इनाम",500],["नाश्ता",600],["गमिछा",160],["पानी बोतल",170],["चालान (जो ट्राली बुकिंग के समय कटा था)",500],["ट्राली का बाकी पेमेंट",2200]
     ],
     note:"समान वापसी करने पर मुझे कुल ₹5,090 रुपये मिले, जिसमें से ₹1,400 के दो नए चोंगा लिए गए। साथ ही 800 का रुवावजा वापस हुआ जिसका पैसा मुझे नहीं मिला।",
-    showOtherExpenses: true, // Only for 2025
+    showOtherExpenses: true,
     committee:[
         ["अध्यक्ष","अभय तिवारी"],
         ["उपाध्यक्ष","पवन सिंह"],
@@ -893,7 +891,7 @@ const data = {
         ["सेव",8100],["केला",1000],["डीजल",2000],["तेल",150],["डीजे",500]
     ],
     note:"2026 के हिसाब के अनुसार कुल प्राप्त राशि ₹17,964, कुल खर्च ₹11,750 और बची हुई राशि ₹6,214 है।",
-    showOtherExpenses: false, // Hidden for 2026
+    showOtherExpenses: false,
     committee:[
         ["अध्यक्ष","गुलशन गुप्ता"],
         ["सचिव / महासचिव","कुंदन बाबू और धनंजय प्रसाद"],
@@ -1286,24 +1284,40 @@ async function downloadPDF(){
     }
 
     const pdfOutput = doc.output("blob");
-    const pdfFile = new File([pdfOutput], `Shri-Jankeshwar-Mahadev-${currentYear}.pdf`, { type: "application/pdf" });
-    
-    if(navigator.canShare && navigator.canShare({ files: [pdfFile] })){
+    const fileName = `Shri-Jankeshwar-Mahadev-${currentYear}.pdf`;
+    const pdfFile = new File([pdfOutput], fileName, { type: "application/pdf" });
+
+    // Fallback enhanced mechanism for mobile share & auto download
+    let sharedSuccessfully = false;
+    if (navigator.share && navigator.canShare) {
         try {
-            await navigator.share({
-                title: `${d.title} — Official Report`,
-                text: `Shri Jankeshwar Mahadev ${currentYear} Report PDF.`,
-                files: [pdfFile]
-            });
-            showToast("PDF शेयर हो गई");
-            return;
-        } catch(err) {
-            if(err.name !== "AbortError") console.log("Share skipped", err);
+            if (navigator.canShare({ files: [pdfFile] })) {
+                await navigator.share({
+                    title: `${d.title} — Official Report`,
+                    text: `श्री जनकेश्वर महादेव ${currentYear} की आय-व्यय रिपोर्ट।`,
+                    files: [pdfFile]
+                });
+                sharedSuccessfully = true;
+                showToast("PDF सफलतापूर्वक शेयर हो गई");
+            }
+        } catch (err) {
+            if (err.name !== "AbortError") {
+                console.log("Share API error, falling back to download", err);
+            }
         }
     }
 
-    doc.save(`Shri-Jankeshwar-Mahadev-${currentYear}.pdf`);
-    showToast("PDF तैयार हो गई");
+    if (!sharedSuccessfully) {
+        const blobUrl = URL.createObjectURL(pdfOutput);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+        showToast("PDF डाउनलोड हो गई है");
+    }
 }
 
 function showToast(text){
