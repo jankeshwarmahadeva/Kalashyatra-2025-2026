@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>श्री जनकेश्वर महादेव</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+<style>
+
+:root{
+    --bg:#fffdf8; 
+    --paper:#fffdf8; 
+    --ink:#2d241c; 
+    --muted:#766a5d;
+    --accent:#7a1c1c; /* मैरून रंग */
+    --accent2:#992424; /* गहरा मैरून */
+    --line:#e7dccb; 
+    --green:#47634b;
+    --red:#a14444;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family: Georgia, "Noto Serif Devanagari", "Noto Sans Devanagari", serif;
+    background: var(--bg);
+    color: var(--ink);
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:72vh;
+    background:
+    linear-gradient(
+        rgba(45,36,28,.3),
+        rgba(45,36,28,.8)
+    ),
+    url("2026.jpg") center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:white;
+}
+
+.hero-content{
+    padding:25px;
+}
+
+.logo{
+    width:95px;
+    height:95px;
+    border-radius:50%;
+    object-fit:contain;
+    background:white;
+    padding:5px;
+    margin-bottom:18px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.om{
+    font-size:38px;
+    color: #e6b800;
+    margin-bottom:8px;
+}
+
+.hero h1{
+    font-size:clamp(34px,7vw,62px);
+    line-height:1.15;
+    font-family: Georgia, serif;
+}
+
+.hero p{
+    margin:12px 0 25px;
+    font-size:16px;
+    font-family: Arial, sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.hero a{
+    display:inline-block;
+    background:var(--accent);
+    color:white;
+    padding:12px 28px;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:700;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 15px rgba(122,28,28,0.3);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.hero a:hover{
+    transform: translateY(-2px);
+    background: var(--accent2);
+}
+
+
+/* =========================
+   PROGRAMS
+========================= */
+
+.container{
+    max-width:980px;
+    margin:auto;
+    padding:55px 16px;
+}
+
+.heading{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.heading small{
+    color:var(--accent);
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+
+.heading h2{
+    font-size:38px;
+    margin:7px 0;
+}
+
+.heading p{
+    color:var(--muted);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.program-grid{
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:25px;
+}
+
+
+/* PROGRAM CARD & ANIMATIONS (1080p Image Responsive Fix) */
+
+.program-card{
+    background:var(--paper);
+    border-radius:18px;
+    overflow:hidden;
+    cursor:pointer;
+    border: 1px solid var(--line);
+    box-shadow: 0 10px 30px rgba(45,36,28,.06);
+    transition: transform .45s ease, box-shadow .45s ease;
+}
+
+.program-card:hover{
+    transform:translateY(-4px);
+    box-shadow: 0 14px 35px rgba(122,28,28,.15);
+}
+
+.program-card img{
+    width:100%;
+    height:280px;
+    object-fit: cover;
+    object-position: center;
+    display:block;
+    transform:scale(1);
+    transition: transform .6s cubic-bezier(.2,.7,.2,1);
+}
+
+.program-card.center-focus img{
+    transform:scale(1.055);
+}
+
+.program-card.center-focus{
+    transform:translateY(-4px);
+    box-shadow: 0 17px 38px rgba(122,28,28,.17);
+}
+
+.program-info{
+    padding:22px;
+}
+
+.program-info small{
+    color:var(--accent);
+    font-weight:700;
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.program-info h3{
+    font-size:24px;
+    margin:6px 0;
+}
+
+.program-info p{
+    color:var(--muted);
+    font-size:14px;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================
+   MODAL (SHEET)
+========================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:999;
+    background:rgba(0,0,0,.75);
+    overflow-y:auto;
+}
+
+.modal.show{
+    display:block;
+}
+
+.sheet{
+    width:min(100%,980px);
+    margin:0 auto;
+    background:var(--bg);
+    min-height:100vh;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(255,253,248,.95);
+    backdrop-filter: blur(5px);
+    border-bottom:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 18px;
+}
+
+.topbar button{
+    border:0;
+    background:#eee9e0;
+    border-radius:9px;
+    padding:9px 16px;
+    font-weight:700;
+    cursor:pointer;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    transition: background 0.2s;
+}
+
+.topbar button:hover{
+    background: var(--accent);
+    color: white;
+}
+
+.top-actions{
+    display:flex;
+    gap:8px;
+}
+
+
+/* =========================
+   ACCOUNT HEADER (1080p Image Auto Fit)
+========================= */
+
+.account-header{
+    background:var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding-bottom:24px;
+}
+
+.account-header img{
+    width:100%;
+    max-height:450px;
+    object-fit: cover;
+    object-position: center;
+    display:block;
+}
+
+.account-heading{
+    padding:24px 24px 0;
+    text-align: center;
+}
+
+.account-heading h1{
+    font-size:clamp(28px,5vw,42px);
+    line-height:1.2;
+}
+
+.account-heading p{
+    color:var(--accent);
+    margin-top:8px;
+    font-family: Arial, sans-serif;
+    font-size: clamp(14px, 3vw, 18px);
+    font-weight: 800;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+}
+
+
+/* =========================
+   ACCOUNT CONTENT
+========================= */
+
+.account-content{
+    padding:20px 16px 50px;
+    max-width: 980px;
+    margin: auto;
+}
+
+
+/* =========================
+   SECRET DONATION
+========================= */
+
+.secret{
+    background:#fcf3f3;
+    border: 1px solid #f2d6d6;
+    border-radius:18px;
+    padding:24px;
+    margin:18px 0;
+    text-align:center;
+}
+
+.secret-top{
+    font-size:11px;
+    letter-spacing:2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+}
+
+.secret h2{
+    font-size:24px;
+    margin:6px 0;
+    color: var(--accent);
+}
+
+.secret-amount{
+    font-size:28px;
+    font-weight:700;
+    color:var(--accent);
+    margin: 8px 0;
+}
+
+.secret-names{
+    font-size:13px;
+    color:var(--muted);
+    margin-top:8px;
+    line-height:1.8;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================
+   TOTAL BOXES (SUMMARY)
+========================= */
+
+.totals{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin:18px 0;
+}
+
+.total{
+    background:var(--paper);
+    border:1px solid var(--line);
+    padding:20px 14px;
+    text-align:center;
+    border-radius:14px;
+}
+
+.total span{
+    display:block;
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:8px;
+    font-family: Arial, sans-serif;
+}
+
+.total strong{
+    font-size:24px;
+}
+
+.total.received strong{
+    color:var(--green);
+}
+
+.total.expense strong{
+    color:var(--red);
+}
+
+.total.balance strong{
+    color:var(--accent);
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.account-section{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:24px;
+    margin:18px 0;
+}
+
+.section-heading{
+    text-align:center;
+    margin-bottom:18px;
+}
+
+.section-heading h2{
+    font-size:24px;
+}
+
+.section-heading h2::after{
+    content:"";
+    display:block;
+    width:44px;
+    height:2px;
+    background:var(--accent);
+    margin:10px auto 0;
+}
+
+
+/* =========================
+   DONOR LIST (Bold for 1000+ & Clean Single Line)
+========================= */
+
+.donor-list{
+    display:flex;
+    flex-direction:column;
+}
+
+.donor-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:11px 4px;
+    border-bottom:1px solid var(--line);
+    font-family:Arial,sans-serif;
+    font-size:14px;
+}
+
+.donor-row:last-child{
+    border-bottom:0;
+}
+
+.donor-name {
+    font-weight: 400;
+}
+
+.donor-name.bold-donor {
+    font-weight: 800;
+    color: var(--ink);
+}
+
+.donor-amount{
+    font-weight: 700;
+    color:var(--accent);
+    white-space:nowrap;
+}
+
+.donor-amount.bold-amount {
+    font-weight: 900;
+}
+
+.major-label{
+    font-size:13px;
+    color:var(--accent);
+    font-weight:bold;
+    text-align:center;
+    margin: 15px 0 8px;
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+/* =========================
+   SMALL DONORS
+========================= */
+
+.compact-donors{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:15px 20px;
+    font-family: Arial, sans-serif;
+}
+
+.compact-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:8px 4px;
+    border-bottom:1px solid var(--line);
+    font-size:14px;
+    color:var(--ink);
+}
+
+.compact-item:last-child{
+    border-bottom:0;
+}
+
+.compact-item strong{
+    font-weight: 900;
+    color: var(--accent);
+}
+
+
+/* =========================
+   EXPENSE LIST
+========================= */
+
+.expense-list{
+    display:flex;
+    flex-direction:column;
+}
+
+.expense-row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:10px 4px;
+    border-bottom:1px solid var(--line);
+    font-family:Arial,sans-serif;
+    font-size:14px;
+}
+
+.expense-row:last-child{
+    border-bottom:0;
+}
+
+.expense-name{
+    font-size:14px;
+}
+
+.expense-amount{
+    font-weight:700;
+    color: var(--red);
+    white-space:nowrap;
+}
+
+.expense-total{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:20px;
+    padding-top:18px;
+    border-top:2px solid var(--accent);
+    font-weight:700;
+    font-size:18px;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================
+   FINAL BALANCE
+========================= */
+
+.final-box{
+    background:var(--paper);
+    border:2px solid var(--accent);
+    border-radius:18px;
+    text-align:center;
+    padding:24px;
+    margin-top:24px;
+}
+
+.final-small{
+    color:var(--muted);
+    font-size:13px;
+    font-weight:700;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+    letter-spacing: 1px;
+}
+
+.final-amount{
+    font-size:clamp(36px,8vw,54px);
+    line-height:1.1;
+    font-weight:700;
+    color:var(--accent);
+    margin:8px 0;
+}
+
+.other-expenses{
+    font-size:clamp(16px,4vw,22px);
+    font-weight:700;
+    color:var(--ink);
+}
+
+
+/* =========================
+   NOTE
+========================= */
+
+.note{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-left:4px solid var(--accent);
+    padding:18px;
+    border-radius:12px;
+    line-height:1.8;
+    margin-top:18px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.note strong{
+    display:block;
+    margin-bottom:4px;
+    color:var(--accent);
+    font-family: Georgia, serif;
+    font-size: 16px;
+}
+
+
+/* =========================
+   COMMITTEE
+========================= */
+
+.committee{
+    display:flex;
+    flex-direction:column;
+}
+
+.committee-row{
+    display:flex;
+    padding:12px 4px;
+    border-bottom:1px solid var(--line);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.committee-row:last-child{
+    border-bottom:0;
+}
+
+.committee-role{
+    width:160px;
+    font-weight:700;
+    color: var(--accent);
+}
+
+.committee-name{
+    color:var(--ink);
+}
+
+
+/* =========================
+   SHARE
+========================= */
+
+.share-area{
+    text-align:center;
+    margin-top:30px;
+    padding-top:25px;
+    border-top:1px solid var(--line);
+}
+
+.share-area p{
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:12px;
+    font-family: Arial, sans-serif;
+}
+
+.share-btn{
+    border:0;
+    background:var(--accent);
+    color:#fff;
+    border-radius:30px;
+    padding:12px 26px;
+    font-weight:700;
+    cursor:pointer;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(122,28,28,0.3);
+    transition: background 0.2s;
+}
+
+.share-btn:hover{
+    background: var(--accent2);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#201913;
+    color:#fff;
+    text-align:center;
+    padding:38px 15px;
+}
+
+.footer-logo{
+    width:60px;
+    height:60px;
+    background:#fff;
+    border-radius:50%;
+    padding:4px;
+    margin:auto auto 10px;
+}
+
+.footer-logo img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+footer h3{
+    font-size:20px;
+}
+
+footer p{
+    color:#aaa49d;
+    font-size:12px;
+    margin-top:4px;
+    font-family: Arial, sans-serif;
+}
+
+.ig-link{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    color:#c9c2b9;
+    text-decoration:none;
+    font-size:12px;
+    margin-top:14px;
+    font-family: Arial, sans-serif;
+}
+
+.ig-icon{
+    width:19px;
+    height:19px;
+    border:1.5px solid #c9c2b9;
+    border-radius:5px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+
+.ig-icon::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border:1.3px solid #c9c2b9;
+    border-radius:50%;
+}
+
+.ig-icon::after{
+    content:"";
+    width:3px;
+    height:3px;
+    background:#c9c2b9;
+    border-radius:50%;
+    position:absolute;
+    top:3px;
+    right:3px;
+}
+
+.copyright{
+    margin-top:20px;
+    font-size:11px;
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translate(-50%,80px);
+    opacity:0;
+    background:var(--accent);
+    color:#fff;
+    padding:11px 18px;
+    border-radius:9px;
+    z-index:2000;
+    transition:.25s;
+    font-size:13px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.toast.show{
+    transform:translate(-50%,0);
+    opacity:1;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+    .program-grid{
+        grid-template-columns:1fr;
+    }
+    .totals{
+        grid-template-columns:1fr;
+    }
+    .committee-row{
+        display:block;
+    }
+    .committee-role{
+        width:auto;
+        margin-bottom:2px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <img src="logo.jpg" class="logo" alt="श्री जनकेश्वर महादेव">
+        <div class="om">ॐ</div>
+        <h1>श्री जनकेश्वर महादेव</h1>
+        <p>कलश यात्रा एवं धार्मिक कार्यक्रम</p>
+        <a href="#programs">कार्यक्रम देखें</a>
+    </div>
+</section>
+
+<!-- PROGRAMS -->
+<main class="container" id="programs">
+    <div class="heading">
+        <small>श्री जनकेश्वर महादेव</small>
+        <h2>कलश यात्रा</h2>
+        <p>कार्यक्रम चुनें और पूरा आय-व्यय विवरण देखें</p>
+    </div>
+
+    <div class="program-grid">
+        <!-- 2025 -->
+        <div class="program-card" onclick="openProgram('2025')">
+            <img src="2025.jpg" alt="कलश यात्रा 2025">
+            <div class="program-info">
+                <small>2025</small>
+                <h3>कलश यात्रा 2025</h3>
+                <p>चंदा एवं सम्पूर्ण खर्च का विवरण</p>
+            </div>
+        </div>
+
+        <!-- 2026 -->
+        <div class="program-card" onclick="openProgram('2026')">
+            <img src="2026.jpg" alt="कलश यात्रा 2026">
+            <div class="program-info">
+                <small>2026</small>
+                <h3>कलश यात्रा 2026</h3>
+                <p>चंदा एवं सम्पूर्ण खर्च का विवरण</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- ACCOUNT MODAL -->
+<div class="modal" id="modal">
+    <div class="sheet">
+        <div class="topbar">
+            <button onclick="closeProgram()">← वापस</button>
+            <div class="top-actions">
+                <button onclick="shareProgram()">↗ Share</button>
+                <button onclick="downloadPDF()">PDF</button>
+            </div>
+        </div>
+        <div id="account"></div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-logo">
+        <img src="logo.jpg" alt="श्री जनकेश्वर महादेव">
+    </div>
+    <h3>श्री जनकेश्वर महादेव</h3>
+    <p>ॐ नमः शिवाय</p>
+    <a href="https://www.instagram.com/jankeshwarmahadeva/" target="_blank" class="ig-link">
+        <span class="ig-icon"></span>
+        @jankeshwarmahadeva
+    </a>
+    <div class="copyright">© श्री जनकेश्वर महादेव</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+const data = {
+"2025":{
+    title:"कलश यात्रा 2025",
+    image:"2025.jpg",
+    received:80068,
+    expensesTotal:78674,
+    balance:1394,
+    secret:{
+        amount:7122,
+        names:["अरवीन्द सिंह", "रामसुरत सिंह", "सुनील तिवारी", "राजेश तिवारी"]
+    },
+    donors:[
+        ["गुलशन गुप्ता",1000],["छोटेलाल सिंह",1000],["कुन्दन सिंह",1000],["रुपेश सिंह",1000],["रोशन लाल",1000],["प्रिन्स सिंह",1000],["उपेन्द्र प्रसाद",1000],["हरमदेव सिंह",1000],["P.D.m",1000],["अशोक सिंह",1000],["सत्येन्द्र सिंह",1000],["भोला मास्टर",1000],["अनुप तिवारी",1000],["रुपा देवी",1000],["सोनु यादव",1000],
+        ["अनिल सिंह",1500],["अमन प्रसाद",1500],["राजन सिंह",1400],["सन्दीप सिंह",1151],["लहवर यादव",1100],["मुत्यु.जय मिश्र",1101],
+        ["धन्नजय प्रसाद",950],["रामजी यादव",900],["मिथिलेश उपाध्याय",800],["रामश्रय सिंह",800],["मनीष सिंह",750],["संजय सिंह",600],["कमलेश सिंह",551],["सरोज सिंह",501],["प्रेम मौर्य",501],["रंगी लाल यादव",500],["अवधेश यादव",500],["सोनू सिंह",500],["कृष्णा सिंह",500],["राजन प्रसाद",500],["राजकिशोर सिंह",500],["मैनेजर यादव",500],["रामलाल सिंह",500],["मनीष प्रसाद",500],["रामशंकर सिंह",500],["जितेन्द्र सिंह",500],["बिकाश सिंह",500],["अनिल सिंह",500],["पवन सिंह",500],["राहुल प्रसाद",500],["राजकुमार",500],["अजीत यादव",500],["बुलेट प्रसाद",500],["गुड्डू प्रसाद",500],["सत्यनारायण यादव",500],["शिवनाथ प्रसाद",500],["सतेंद्र यादव",500],
+        ["नरेश यादव",400],["प्रभुदयाल सिंह",400],["कन्हैया सिंह",400],["सुदामा सिंह",400],["राजकुमार यादव",400],
+        ["हरेराम सिंह वार्ड",300],["विजय प्रसाद",250],["राजु प्रसाद",250],["संपत गौंड",200],["बृजेश यादव",200],["महंत सिंह",200],["नथुनी सिंह",200],["रिशु मिश्रा",200],["दौड़ा यादव",200],["बब्बन प्रसाद",200],["धन्नजय साह",200],
+        ["सुबोध सिंह",100],["रामाशंकर ठाकुर",100],["सुभाष सिंह",100],["सुरेश सिंह",100]
+    ],
+    special:[
+        ["संजय सिंह (ईट)",3000],
+        ["महंथ पंडित (मुखिया)",2500],
+        ["रुपेश द्वारा इकट्ठा चन्दा",2700],
+        ["बाहर के गाँव से वसुला गया चन्दा", 18841]
+    ],
+    expenses:[
+        ["झाँकी टीम बुकिंग (एडवांस)",2500],["माँ टॅाली ट्रेड्स / ट्राली बुकिंग",500],["चंदा पर्ची",300],["चंदा पर्ची (दूसरी)",300],["बैनर",2560],["ट्राली बुकिंग",500],["बैनर",580],["तेल",100],["तेल",100],["तेल",59],["मंदिर दान में खलया",100],["साउंड स्पीक",540],["इलेक्ट्री समान",1900],["गेट",100],["फेविक्विक",30],["ग्राइन्डर वायर",160],["एंगल व कब्जा",1130],["तेल",100],["I'D कार्ड एडवांस",300],["वायर",82],["रस्सी विलिप",80],["झड़ा",1820],["तेल",100],["कुंडी",30],["तार (लोहा)",150],["वेल्डिंग रड़",18],["वायर क्लिप (7mm)",30],["तेल",200],["कार्ड",50],["लाईटिंग",2400],["फुल प्लास्टिक वाला",1750],["ब्रश एवं पेंट",170],["बैलुन",70],
+        ["तेल",110],["अतिथि स्वागत (VIPul)",130],["कपड़ा (झड़ा)",130],["तेल",100],["कार्ड (Invitation)",40],["लिफाफा",10],["रूवावजा",1000],["रूपेश भगत - चीनी के लिए",2000],["बेसन रिफाइण्ड, गिलास, फल",8500],["डीजल",8000],["तेल",100],["तेल",200],["फुल माला के लिए",1000],["बुनिया सामान",3990],["आलू मिर्च",120],["परोस परोरा",80],["काला हिट",330],["पार्टी स्प्रे",140],["काला हिट",220],["अलारोट",260],["चीनी",225],["झाकि टीम नाश्ता",90],["पेट्रोल",200],["खीर चावल",120],["खीर मटेरियल",110],
+        ["फेबीकिट",25],["लाईटर",10],["झाकि टीम",17500],["टेन्ट",4000],["सिलेण्डर",1000],["ब्राह्मण दक्षिणा",3000],["सम्पूर्ण पुजा सामान व चदावा",3000],["इनाम",500],["नाश्ता",600],["गमिछा",160],["पानी बोतल",170],["चालान (जो ट्राली बुकिंग के समय कटा था)",500],["ट्राली का बाकी पेमेंट",2200]
+    ],
+    note:"समान वापसी करने पर मुझे कुल ₹5,090 रुपये मिले, जिसमें से ₹1,400 के दो नए चोंगा लिए गए।",
+    committee:[
+        ["अध्यक्ष","अभय तिवारी"],
+        ["उपाध्यक्ष","पवन सिंह"],
+        ["कोषाध्यक्ष","गुलशन गुप्ता"],
+        ["सचिव","धनंजय"],
+        ["सुरक्षा प्रमुख", "कुंदन बाबू व चंदन सिंह"]
+    ]
+},
+"2026":{
+    title:"कलश यात्रा 2026",
+    image:"2026.jpg",
+    received:17964,
+    expensesTotal:11750,
+    balance:6214,
+    secret:{
+        amount:4000,
+        names:["अरविंद सिंह", "रामसूरत सिंह"]
+    },
+    donors:[
+        ["अनिल सिंह",2000],["धन्नंजय प्रसाद",2000],["रौशन लाल",1000],["रामलाल सिंह",200],["उपेन्द्र सिंह",100],["बबन प्रसाद",40],["संजय प्रसाद",50],["धर्मेन्द्र सिंह",105],["नन्द किशोर सिंह",null],["राजु प्रसाद",101],["सुबोध सिंह",100],["सम्भु सिंह",100],["जवाही प्रसाद",50],["राजमंगल प्रसाद",50],["संपत गोड",51],["संजय सिंह",200],["जनमेजय सिंह",100],["हरिन्दर प्रसाद",100],["राजेश प्रसाद",150],["महंथ सिंह",50],["चन्द्रमा सिंह",100],["राजन सिंह",700],["होटेलाल सिंह",500],["गौरी सिंह",100],["मुन्ना प्रसाद",55],["विजय प्रसाद",50],["अनिल सिंह",100],["कुन्दन सिंह",1000],["रुपा देवी",1000],["राजकिशोर सिंह",211],["बाबूराम सिंह",500]
+    ],
+    expenses:[
+        ["सेव",8100],["केला",1000],["डीजल",2000],["तेल",150],["डीजे",500]
+    ],
+    note:"2026 के हिसाब के अनुसार कुल प्राप्त राशि ₹17,964, कुल खर्च ₹11,750 और बची हुई राशि ₹6,214 है।",
+    committee:[
+        ["अध्यक्ष","गुलशन गुप्ता"],
+        ["संपूर्ण सहयोगकर्ता", "धनंजय प्रसाद और कुंदन बाबू"]
+    ]
+}
+};
+
+function money(number){
+    if(number === null || number === undefined){
+        return "राशि अंकित नहीं";
+    }
+    return "₹" + Number(number).toLocaleString("en-IN");
+}
+
+function escapeHTML(text){
+    return String(text)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+let currentYear="";
+
+function openProgram(year){
+    currentYear=year;
+    const d=data[year];
+
+    let donors=[...d.donors];
+    donors.sort((a,b)=>{
+        if(a[1]===null) return 1;
+        if(b[1]===null) return -1;
+        return b[1]-a[1];
+    });
+
+    let special=[...(d.special || [])];
+    special.sort((a,b)=>b[1]-a[1]);
+
+    let majorHTML="";
+
+    // Special Donors (Bold & Highlighted)
+    special.forEach((item,index)=>{
+        majorHTML += `
+        <div class="donor-row">
+            <div class="donor-name bold-donor">
+                ${index+1}. ${escapeHTML(item[0])}
+            </div>
+            <div class="donor-amount bold-amount">
+                ${money(item[1])}
+            </div>
+        </div>`;
+    });
+
+    // 1000 and Above Donors (Bold name and amount)
+    donors.forEach(item=>{
+        if(item[1] !== null && item[1] >= 1000){
+            majorHTML += `
+            <div class="donor-row">
+                <div class="donor-name bold-donor">
+                    ${escapeHTML(item[0])}
+                </div>
+                <div class="donor-amount bold-amount">
+                    ${money(item[1])}
+                </div>
+            </div>`;
+        }
+    });
+
+    // Small Donors (Under 1000)
+    const small = donors.filter(item => item[1] === null || item[1] < 1000);
+    let smallHTML="";
+    small.forEach(item=>{
+        smallHTML += `
+        <div class="compact-item">
+            <span>${escapeHTML(item[0])}</span>
+            <strong>${money(item[1])}</strong>
+        </div>`;
+    });
+
+    let expenseHTML="";
+    d.expenses.forEach((item,index)=>{
+        expenseHTML += `
+        <div class="expense-row">
+            <div class="expense-name">${index+1}. ${escapeHTML(item[0])}</div>
+            <div class="expense-amount">${money(item[1])}</div>
+        </div>`;
+    });
+
+    let committeeHTML="";
+    d.committee.forEach(item=>{
+        committeeHTML += `
+        <div class="committee-row">
+            <div class="committee-role">${escapeHTML(item[0])}</div>
+            <div class="committee-name">${escapeHTML(item[1])}</div>
+        </div>`;
+    });
+
+    document.getElementById("account").innerHTML = `
+    <div class="account-header">
+        <img src="${d.image}" alt="${escapeHTML(d.title)}">
+        <div class="account-heading">
+            <h1>${escapeHTML(d.title)}</h1>
+            <p>5 लाख 7 लाख चंदे का घोटाले का लिस्ट</p>
+        </div>
+    </div>
+
+    <div class="account-content">
+        <!-- TOTALS -->
+        <div class="totals">
+            <div class="total received">
+                <span>कुल प्राप्त चंदा</span>
+                <strong>${money(d.received)}</strong>
+            </div>
+            <div class="total expense">
+                <span>कुल खर्च</span>
+                <strong>${money(d.expensesTotal)}</strong>
+            </div>
+            <div class="total balance">
+                <span>बचा हुआ शेष</span>
+                <strong>${money(d.balance)}</strong>
+            </div>
+        </div>
+
+        <!-- SECRET -->
+        <div class="secret">
+            <div class="secret-top">विशेष विवरण</div>
+            <h2>🔒 गुप्त दान</h2>
+            <div class="secret-amount">${money(d.secret.amount)}</div>
+            <div class="secret-names">${d.secret.names.map(escapeHTML).join(" • ")}</div>
+        </div>
+
+        <!-- DONORS -->
+        <section class="account-section">
+            <div class="section-heading">
+                <h2>चंदा विवरण सूची</h2>
+            </div>
+            <div class="major-label">प्रमुख दानदाता — ₹1,000 एवं उससे अधिक</div>
+            <div class="donor-list">
+                ${majorHTML}
+            </div>
+        </section>
+
+        <!-- SMALL DONORS -->
+        <section class="account-section">
+            <div class="section-heading">
+                <h2>अन्य सहयोगकर्ता</h2>
+            </div>
+            <div class="compact-donors">
+                ${smallHTML}
+            </div>
+        </section>
+
+        <!-- EXPENSE -->
+        <section class="account-section">
+            <div class="section-heading">
+                <h2>पूरा खर्च विवरण</h2>
+            </div>
+            <div class="expense-list">
+                ${expenseHTML}
+            </div>
+            <div class="expense-total">
+                <span>कुल खर्च</span>
+                <span>${money(d.expensesTotal)}</span>
+            </div>
+        </section>
+
+        <!-- FINAL -->
+        <div class="final-box">
+            <div class="final-small">अंतिम हिसाब</div>
+            <div class="final-amount">${money(d.balance)}</div>
+            <div class="other-expenses">सुरक्षित शेष राशि</div>
+        </div>
+
+        <!-- NOTE -->
+        <div class="note">
+            <strong>महत्वपूर्ण नोट</strong>
+            ${escapeHTML(d.note)}
+        </div>
+
+        <!-- COMMITTEE -->
+        <section class="account-section">
+            <div class="section-heading">
+                <h2>प्रमुख व्यक्ति एवं समिति</h2>
+            </div>
+            <div class="committee">
+                ${committeeHTML}
+            </div>
+        </section>
+
+        <!-- SHARE -->
+        <div class="share-area">
+            <p>इस कार्यक्रम का पूरा हिसाब साझा करें</p>
+            <button class="share-btn" onclick="shareProgram()">↗ Share करें</button>
+        </div>
+    </div>
+    `;
+
+    document.getElementById("modal").classList.add("show");
+    document.body.style.overflow="hidden";
+    history.replaceState(null, "", "#"+year);
+}
+
+function closeProgram(){
+    document.getElementById("modal").classList.remove("show");
+    document.body.style.overflow="";
+    currentYear="";
+    history.replaceState(null, "", window.location.pathname);
+}
+
+async function shareProgram(){
+    if(!currentYear) return;
+    const d=data[currentYear];
+    const url = location.origin + location.pathname + "#" + currentYear;
+    const shareData={
+        title: "श्री जनकेश्वर महादेव — " + currentYear,
+        text: `${d.title}\nकुल चंदा: ${money(d.received)}\nकुल खर्च: ${money(d.expensesTotal)}\nबचा हुआ: ${money(d.balance)}`,
+        url:url
+    };
+    try{
+        if(navigator.share){
+            await navigator.share(shareData);
+        }else{
+            await navigator.clipboard.writeText(url);
+            showToast("लिंक कॉपी हो गया");
+        }
+    }catch(error){}
+}
+
+async function downloadPDF(){
+    if(!currentYear) return;
+    const d=data[currentYear];
+    showToast("PDF तैयार हो रही है...");
+
+    const {jsPDF}=window.jspdf;
+    const doc=new jsPDF({ unit:"mm", format:"a4" });
+
+    doc.setFontSize(20);
+    doc.text("Shri Jankeshwar Mahadev", 105, 15, { align:"center" });
+    doc.setFontSize(14);
+    doc.text(`Kalash Yatra ${currentYear}`, 105, 23, { align:"center" });
+
+    try{
+        const image = await getImageData(d.image);
+        doc.addImage(image, "JPEG", 20, 30, 170, 72);
+    }catch(error){
+        console.log(error);
+    }
+
+    doc.setFontSize(11);
+    doc.text(`Total Received: ${money(d.received)}`, 20, 112);
+    doc.text(`Total Expenses: ${money(d.expensesTotal)}`, 20, 119);
+    doc.text(`Bacha Hua: ${money(d.balance)}`, 20, 126);
+
+    let rows = [...d.donors].sort((a,b)=>{
+        if(a[1]===null) return 1;
+        if(b[1]===null) return -1;
+        return b[1]-a[1];
+    }).map((item,index)=>[
+        index+1,
+        item[0],
+        item[1]===null ? "राशि अंकित नहीं" : money(item[1])
+    ]);
+
+    doc.autoTable({
+        startY:135,
+        head:[["क्र.", "नाम", "राशि"]],
+        body:rows,
+        theme:"grid",
+        styles:{ fontSize:7 }
+    });
+
+    let y = doc.lastAutoTable.finalY + 10;
+    let expenseRows = d.expenses.map((item,index)=>[
+        index+1,
+        item[0],
+        money(item[1])
+    ]);
+
+    doc.setFontSize(13);
+    doc.text("पूरा खर्च विवरण", 20, y);
+    doc.autoTable({
+        startY:y+4,
+        head:[["क्र.", "खर्च", "राशि"]],
+        body:expenseRows,
+        theme:"grid",
+        styles:{ fontSize:7 }
+    });
+
+    y = doc.lastAutoTable.finalY + 10;
+    doc.setFontSize(11);
+    doc.text(`कुल खर्च: ${money(d.expensesTotal)}`, 20, y);
+    doc.text(`बचा हुआ: ${money(d.balance)}`, 20, y+7);
+
+    doc.save(`Shri-Jankeshwar-Mahadev-${currentYear}.pdf`);
+    showToast("PDF तैयार हो गई");
+}
+
+function getImageData(src){
+    return new Promise((resolve,reject)=>{
+        const img = new Image();
+        img.crossOrigin = "Anonymous";
+        img.onload=()=>{
+            const canvas = document.createElement("canvas");
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+            resolve(canvas.toDataURL("image/jpeg", .9));
+        };
+        img.onerror = reject;
+        img.src = src + "?v=" + Date.now();
+    });
+}
+
+function showToast(text){
+    const toast = document.getElementById("toast");
+    toast.textContent = text;
+    toast.classList.add("show");
+    setTimeout(()=>{
+        toast.classList.remove("show");
+    }, 2300);
+}
+
+document.addEventListener("keydown", event=>{
+    if(event.key === "Escape" && currentYear){
+        closeProgram();
+    }
+});
+
+// Card center focus animation script
+const cards = document.querySelectorAll(".program-card");
+function updateCardFocus(){
+    const center = window.innerHeight / 2;
+    cards.forEach(card=>{
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(center - cardCenter);
+        if(distance < window.innerHeight * .24){
+            card.classList.add("center-focus");
+        }else{
+            card.classList.remove("center-focus");
+        }
+    });
+}
+window.addEventListener("scroll", updateCardFocus, {passive:true});
+window.addEventListener("resize", updateCardFocus);
+window.addEventListener("load", updateCardFocus);
+
+window.addEventListener("load", ()=>{
+    const hash = location.hash.replace("#","");
+    if(data[hash]){
+        openProgram(hash);
+    }
+});
+
+</script>
+</body>
+</html>
