@@ -36,7 +36,7 @@ html{
 
 body{
     font-family: Georgia, "Noto Serif Devanagari", "Noto Sans Devanagari", serif;
-    background: var(--bg);
+    background: #fffdf8;
     color: var(--ink);
 }
 
@@ -138,7 +138,7 @@ body{
 }
 
 /* =========================
-   PROGRAMS
+   PROGRAMS (With Light Shadow & Animation)
 ========================= */
 
 .container{
@@ -184,13 +184,14 @@ body{
     overflow:hidden;
     cursor:pointer;
     border: 1px solid var(--line);
-    box-shadow: 0 10px 30px rgba(45,36,28,.06);
-    transition: transform .45s ease, box-shadow .45s ease;
+    /* Light shadow added and smooth transition for animation */
+    box-shadow: 0 4px 20px rgba(45,36,28,0.08);
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .program-card:hover{
-    transform:translateY(-4px);
-    box-shadow: 0 14px 35px rgba(122,28,28,.15);
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 12px 35px rgba(122,28,28,0.18);
 }
 
 .program-card img{
@@ -244,7 +245,7 @@ body{
 .sheet{
     width:min(100%,980px);
     margin:0 auto;
-    background:var(--bg);
+    background: #fffdf8;
     min-height:100vh;
 }
 
@@ -284,41 +285,43 @@ body{
     gap:8px;
 }
 
+/* Maroon background removed from modal header, replaced with clean light style */
 .account-header{
-    background:var(--paper);
+    background: #fffdf8; 
     border-bottom: 1px solid var(--line);
-    padding-bottom:24px;
+    padding-bottom:10px;
+    color: var(--ink);
 }
 
 .account-header img{
     width:100%;
-    max-height:450px;
+    max-height:400px;
     object-fit: cover;
     object-position: center;
     display:block;
 }
 
 .account-heading{
-    padding:24px 24px 0;
+    padding:20px 24px 0;
     text-align: center;
 }
 
 .account-heading h1{
     font-size:clamp(28px,5vw,42px);
     line-height:1.2;
+    color: var(--ink);
 }
 
 .account-heading p{
-    color:var(--accent);
-    margin-top:8px;
+    color: var(--accent);
+    margin-top:6px;
     font-family: Arial, sans-serif;
-    font-size: clamp(14px, 3vw, 18px);
-    font-weight: 800;
+    font-size: clamp(14px, 3vw, 16px);
+    font-weight: 700;
     letter-spacing: .05em;
     text-transform: uppercase;
 }
 
-/* Scam Strip */
 .scam-strip {
     background: #f8eaea;
     border: 1px dashed var(--accent);
@@ -385,7 +388,7 @@ body{
 }
 
 .total{
-    background:var(--paper);
+    background: #fffdf8;
     border:1px solid var(--line);
     padding:20px 14px;
     text-align:center;
@@ -417,7 +420,7 @@ body{
 }
 
 .account-section{
-    background:var(--paper);
+    background: #fffdf8;
     border:1px solid var(--line);
     border-radius:18px;
     padding:24px;
@@ -488,7 +491,7 @@ body{
 }
 
 .compact-donors{
-    background:var(--paper);
+    background: #fffdf8;
     border:1px solid var(--line);
     border-radius:18px;
     padding:15px 20px;
@@ -547,7 +550,7 @@ body{
 }
 
 .final-box{
-    background:var(--paper);
+    background: #fffdf8;
     border:2px solid var(--accent);
     border-radius:18px;
     text-align:center;
@@ -579,7 +582,7 @@ body{
 }
 
 .note{
-    background:var(--paper);
+    background: #fffdf8;
     border:1px solid var(--line);
     border-left:4px solid var(--accent);
     padding:18px;
@@ -640,28 +643,24 @@ body{
     box-shadow: 0 4px 15px rgba(122,28,28,0.3);
 }
 
-/* =========================
-   FOOTER
-========================= */
-
 footer{
     background:#201913;
     color:#fff;
     text-align:center;
-    padding:38px 15px;
+    padding:20px 15px;
 }
 
 .footer-logo{
-    width:65px;
-    height:65px;
+    width:45px;
+    height:45px;
     background:#fff;
     border-radius:50%;
-    margin:0 auto 12px;
+    margin:0 auto 6px;
     display:flex;
     align-items:center;
     justify-content:center;
     overflow:hidden;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
 .footer-logo img{
@@ -671,32 +670,32 @@ footer{
 }
 
 footer h3{
-    font-size:20px;
+    font-size:16px;
 }
 
 footer p{
     color:#aaa49d;
-    font-size:12px;
-    margin-top:4px;
+    font-size:11px;
+    margin-top:2px;
     font-family: Arial, sans-serif;
 }
 
 .ig-link{
     display:inline-flex;
     align-items:center;
-    gap:6px;
+    gap:5px;
     color:#c9c2b9;
     text-decoration:none;
-    font-size:12px;
-    margin-top:14px;
+    font-size:11px;
+    margin-top:8px;
     font-family: Arial, sans-serif;
 }
 
 .ig-icon{
-    width:19px;
-    height:19px;
-    border:1.5px solid #c9c2b9;
-    border-radius:5px;
+    width:15px;
+    height:15px;
+    border:1.2px solid #c9c2b9;
+    border-radius:4px;
     display:inline-flex;
     align-items:center;
     justify-content:center;
@@ -705,26 +704,26 @@ footer p{
 
 .ig-icon::before{
     content:"";
-    width:7px;
-    height:7px;
-    border:1.3px solid #c9c2b9;
+    width:5px;
+    height:5px;
+    border:1px solid #c9c2b9;
     border-radius:50%;
 }
 
 .ig-icon::after{
     content:"";
-    width:3px;
-    height:3px;
+    width:2px;
+    height:2px;
     background:#c9c2b9;
     border-radius:50%;
     position:absolute;
-    top:3px;
-    right:3px;
+    top:2px;
+    right:2px;
 }
 
 .copyright{
-    margin-top:20px;
-    font-size:11px;
+    margin-top:10px;
+    font-size:10px;
     color: var(--muted);
     font-family: Arial, sans-serif;
 }
@@ -763,7 +762,6 @@ footer p{
 
 <body>
 
-<!-- HERO WITH SLIDER -->
 <section class="hero">
     <div class="hero-slider">
         <div class="hero-slide active" style="background-image: url('Mahadev-big.jpg');"></div>
@@ -780,7 +778,6 @@ footer p{
     </div>
 </section>
 
-<!-- PROGRAMS -->
 <main class="container" id="programs">
     <div class="heading">
         <small>श्री जनकेश्वर महादेव</small>
@@ -809,7 +806,6 @@ footer p{
     </div>
 </main>
 
-<!-- ACCOUNT MODAL -->
 <div class="modal" id="modal">
     <div class="sheet">
         <div class="topbar">
@@ -823,7 +819,6 @@ footer p{
     </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
     <div class="footer-logo">
         <img src="logo.jpg" alt="श्री जनकेश्वर महादेव">
@@ -872,6 +867,7 @@ const data = {
         ["फेबीकिट",25],["लाईटर",10],["झाकि टीम",17500],["टेन्ट",4000],["सिलेण्डर",1000],["ब्राह्मण दक्षिणा",3000],["सम्पूर्ण पुजा सामान व चदावा",3000],["इनाम",500],["नाश्ता",600],["गमिछा",160],["पानी बोतल",170],["चालान (जो ट्राली बुकिंग के समय कटा था)",500],["ट्राली का बाकी पेमेंट",2200]
     ],
     note:"समान वापसी करने पर मुझे कुल ₹5,090 रुपये मिले, जिसमें से ₹1,400 के दो नए चोंगा लिए गए। साथ ही 800 का रुवावजा वापस हुआ जिसका पैसा मुझे नहीं मिला।",
+    showOtherExpenses: true, // Only for 2025
     committee:[
         ["अध्यक्ष","अभय तिवारी"],
         ["उपाध्यक्ष","पवन सिंह"],
@@ -897,6 +893,7 @@ const data = {
         ["सेव",8100],["केला",1000],["डीजल",2000],["तेल",150],["डीजे",500]
     ],
     note:"2026 के हिसाब के अनुसार कुल प्राप्त राशि ₹17,964, कुल खर्च ₹11,750 और बची हुई राशि ₹6,214 है।",
+    showOtherExpenses: false, // Hidden for 2026
     committee:[
         ["अध्यक्ष","गुलशन गुप्ता"],
         ["सचिव / महासचिव","कुंदन बाबू और धनंजय प्रसाद"],
@@ -966,20 +963,11 @@ function openProgram(year){
         </div>
     </div>
 
-    <!-- Scam Strip Section -->
     <div class="scam-strip">
         5 लाख 7 लाख चंदे का घोटाले का लिस्ट
     </div>
 
     <div class="account-content">
-        <!-- SECRET -->
-        <div class="secret">
-            <div class="secret-top">विशेष विवरण</div>
-            <h2>🔒 गुप्त दान</h2>
-            <div class="secret-amount">${money(d.secret.amount)}</div>
-            <div class="secret-names">${d.secret.names.map(escapeHTML).join(" • ")}</div>
-        </div>
-
         <!-- DONORS -->
         <section class="account-section">
             <div class="section-heading">
@@ -1009,6 +997,14 @@ function openProgram(year){
             </div>
         </section>
 
+        <!-- SECRET / GUPT DAAN -->
+        <div class="secret">
+            <div class="secret-top">विशेष विवरण</div>
+            <h2>🔒 गुप्त दान</h2>
+            <div class="secret-amount">${money(d.secret.amount)}</div>
+            <div class="secret-names">${d.secret.names.map(escapeHTML).join(" • ")}</div>
+        </div>
+
         <!-- TOTALS -->
         <div class="totals">
             <div class="total received">
@@ -1029,7 +1025,7 @@ function openProgram(year){
         <div class="final-box">
             <div class="final-small">अंतिम हिसाब</div>
             <div class="final-amount">${money(d.balance)}</div>
-            <div class="other-expenses">अन्य छोटे-मोटे खर्चे</div>
+            ${d.showOtherExpenses ? `<div class="other-expenses">अन्य छोटे-मोटे खर्चे</div>` : ''}
         </div>
 
         <!-- NOTE -->
@@ -1085,58 +1081,30 @@ async function shareProgram(){
     }catch(error){}
 }
 
-/* ========================================================
-   PROFESSIONAL TEMPLE ACCOUNTING REPORT PDF GENERATION
-   Using NotoSansDevanagari Base64 Embedded Font & AutoTable
-======================================================== */
-const NOTO_SANS_DEVANAGARI_BASE64 = ""; 
-// Note: To make Hindi render completely natively in jsPDF without broken boxes, 
-// embed your valid base64 encoded NotoSansDevanagari-Regular.ttf string above. 
-// If empty, standard fallback handles canvas formatting cleanly.
-
 async function downloadPDF(){
     if(!currentYear) return;
     const d = data[currentYear];
-    showToast("प्रोफेशनल PDF तैयार हो रही है...");
+    showToast("PDF तैयार हो रही है...");
 
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ unit: "mm", format: "a4", putOnlyUsedFonts: true });
 
-    // Data Consistency Validation check
-    const calculatedBalance = d.received - d.expensesTotal;
-    if(calculatedBalance !== d.balance) {
-        console.warn(`Data Mismatch Warning: received (${d.received}) - expensesTotal (${d.expensesTotal}) = ${calculatedBalance}, but stored balance is ${d.balance}`);
-    }
-
-    // Register Hindi Font if provided
     let fontName = "Helvetica";
-    try {
-        if(NOTO_SANS_DEVANAGARI_BASE64.length > 100) {
-            doc.addFileToVFS("NotoSansDevanagari-Regular.ttf", NOTO_SANS_DEVANAGARI_BASE64);
-            doc.addFont("NotoSansDevanagari-Regular.ttf", "NotoSansDevanagari", "normal");
-            fontName = "NotoSansDevanagari";
-        }
-    } catch(e) {
-        console.warn("Font loading fallback to standard fonts", e);
-    }
 
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
     const margin = 15;
     const usableWidth = pageWidth - (margin * 2);
 
-    // Helper: Header & Footer Renderer for multi-pages
     const addHeaderFooter = (currentPage, totalPages) => {
         doc.setFont(fontName, "normal");
         doc.setFontSize(8);
         doc.setTextColor(118, 106, 93);
-        // Header line
         doc.text("श्री जनकेश्वर महादेव कल्याण सेवा समिति", margin, 10);
         doc.setDrawWeight(0.5);
         doc.setDrawColor(231, 220, 203);
         doc.line(margin, 12, pageWidth - margin, 12);
 
-        // Footer line & text
         doc.line(margin, pageHeight - 12, pageWidth - margin, pageHeight - 12);
         doc.text("श्री जनकेश्वर महादेव ऑफिशियल आय-व्यय रिपोर्ट", margin, pageHeight - 8);
         doc.text(`Page ${currentPage} of ${totalPages}`, pageWidth - margin, pageHeight - 8, { align: "right" });
@@ -1144,31 +1112,30 @@ async function downloadPDF(){
 
     let startY = 18;
 
-    // --- FRONT PAGE / UPPER HEADING ---
     doc.setFont(fontName, "bold");
     doc.setFontSize(10);
     doc.setTextColor(122, 28, 28);
     doc.text("ॐ", pageWidth / 2, startY, { align: "center" });
     startY += 6;
 
-    doc.setFontSize(22);
+    doc.setFontSize(20);
     doc.setTextColor(45, 36, 28);
-    doc.text("श्री जनकेश्वर महादेव", pageWidth / 2, startY, { align: "center" });
+    doc.text("Shri Jankeshwar Mahadev", pageWidth / 2, startY, { align: "center" });
     startY += 6;
 
     doc.setFontSize(11);
     doc.setTextColor(118, 106, 93);
-    doc.text("श्री जनकेश्वर महादेव कल्याण सेवा समिति", pageWidth / 2, startY, { align: "center" });
+    doc.text("Shri Jankeshwar Mahadev Kalyan Seva Samiti", pageWidth / 2, startY, { align: "center" });
     startY += 6;
 
-    doc.setFontSize(13);
+    doc.setFontSize(12);
     doc.setTextColor(122, 28, 28);
-    doc.text(`कलश यात्रा ${currentYear}`, pageWidth / 2, startY, { align: "center" });
+    doc.text(`Kalash Yatra ${currentYear}`, pageWidth / 2, startY, { align: "center" });
     startY += 6;
 
     doc.setFontSize(10);
     doc.setTextColor(70, 70, 70);
-    doc.text("संपूर्ण आय-व्यय एवं सहयोग विवरण", pageWidth / 2, startY, { align: "center" });
+    doc.text("Sampoorna Aay-Vyay Evam Sahyog Vivaran", pageWidth / 2, startY, { align: "center" });
     startY += 4;
 
     doc.setDrawColor(122, 28, 28);
@@ -1176,63 +1143,47 @@ async function downloadPDF(){
     doc.line(pageWidth / 2 - 30, startY, pageWidth / 2 + 30, startY);
     startY += 8;
 
-    // --- FINANCIAL SUMMARY CARDS ---
     const boxWidth = (usableWidth - 8) / 3;
     const boxHeight = 18;
     
-    // Box 1: Received
     doc.setFillColor(245, 243, 238);
     doc.roundedRect(margin, startY, boxWidth, boxHeight, 2, 2, "F");
     doc.setFontSize(8);
     doc.setTextColor(118, 106, 93);
-    doc.text("कुल प्राप्त चंदा", margin + boxWidth / 2, startY + 6, { align: "center" });
-    doc.setFontSize(11);
+    doc.text("Total Received", margin + boxWidth / 2, startY + 6, { align: "center" });
+    doc.setFontSize(10);
     doc.setTextColor(71, 99, 75);
     doc.text(money(d.received), margin + boxWidth / 2, startY + 13, { align: "center" });
 
-    // Box 2: Expense
     doc.setFillColor(245, 243, 238);
     doc.roundedRect(margin + boxWidth + 4, startY, boxWidth, boxHeight, 2, 2, "F");
     doc.setFontSize(8);
     doc.setTextColor(118, 106, 93);
-    doc.text("कुल खर्च", margin + boxWidth + 4 + boxWidth / 2, startY + 6, { align: "center" });
-    doc.setFontSize(11);
+    doc.text("Total Expense", margin + boxWidth + 4 + boxWidth / 2, startY + 6, { align: "center" });
+    doc.setFontSize(10);
     doc.setTextColor(161, 68, 68);
     doc.text(money(d.expensesTotal), margin + boxWidth + 4 + boxWidth / 2, startY + 13, { align: "center" });
 
-    // Box 3: Balance
     doc.setFillColor(245, 243, 238);
     doc.roundedRect(margin + (boxWidth + 4) * 2, startY, boxWidth, boxHeight, 2, 2, "F");
     doc.setFontSize(8);
     doc.setTextColor(118, 106, 93);
-    doc.text("शेष राशि", margin + (boxWidth + 4) * 2 + boxWidth / 2, startY + 6, { align: "center" });
-    doc.setFontSize(11);
+    doc.text("Balance", margin + (boxWidth + 4) * 2 + boxWidth / 2, startY + 6, { align: "center" });
+    doc.setFontSize(10);
     doc.setTextColor(122, 28, 28);
     doc.text(money(d.balance), margin + (boxWidth + 4) * 2 + boxWidth / 2, startY + 13, { align: "center" });
 
     startY += boxHeight + 8;
 
-    // --- GUPT DAAN SECTION ---
-    if(d.secret) {
-        doc.setFillColor(252, 243, 243);
-        doc.setDrawColor(242, 214, 214);
-        doc.roundedRect(margin, startY, usableWidth, 14, 2, 2, "FD");
-        doc.setFontSize(9);
-        doc.setTextColor(122, 28, 28);
-        doc.text(`🔒 गुप्त दान: ${money(d.secret.amount)}  (${d.secret.names.join(", ")})`, margin + 6, startY + 9);
-        startY += 20;
-    }
-
-    // --- DONOR SECTIONS (AUTO TABLE) ---
-    doc.setFontSize(12);
+    doc.setFontSize(11);
     doc.setTextColor(122, 28, 28);
-    doc.text("चंदा एवं सहयोग विवरण (प्रमुख दानदाता — ₹1,000 एवं उससे अधिक)", margin, startY);
+    doc.text("Chanda Vivaran — Pramukh Danta (Rs. 1,000+)", margin, startY);
     startY += 4;
 
     let majorRows = [];
     if(d.special) {
         d.special.forEach((item, index) => {
-            majorRows.push([index + 1, item[0] + " (विशेष सहयोग)", money(item[1])]);
+            majorRows.push([index + 1, item[0] + " (Vishesh)", money(item[1])]);
         });
     }
 
@@ -1250,49 +1201,20 @@ async function downloadPDF(){
 
     doc.autoTable({
         startY: startY,
-        head: [["क्र.", "दानदाता का नाम", "राशि"]],
+        head: [["S.No.", "Donor Name", "Amount"]],
         body: majorRows,
         theme: "grid",
-        styles: { font: fontName, fontSize: 8, cellPadding: 2.5, textColor: [45, 36, 28] },
-        headStyles: { fillColor: [122, 28, 28], textColor: [255, 255, 255], fontStyle: "bold" },
+        styles: { font: fontName, fontSize: 8, cellPadding: 2, textColor: [45, 36, 28] },
+        headStyles: { fillColor: [122, 28, 28], textColor: [255, 255, 255] },
         columnStyles: { 0: { halign: 'center', cellWidth: 12 }, 1: { halign: 'left' }, 2: { halign: 'right', cellWidth: 35 } },
         margin: { left: margin, right: margin }
     });
 
     startY = doc.lastAutoTable.finalY + 8;
 
-    // --- OTHER SMALL DONORS ---
-    const smallDonors = sortedDonors.filter(item => item[1] === null || item[1] < 1000);
-    if(smallDonors.length > 0) {
-        doc.setFontSize(12);
-        doc.setTextColor(122, 28, 28);
-        doc.text("अन्य सहयोगकर्ता (< ₹1,000)", margin, startY);
-        startY += 4;
-
-        let smallRows = smallDonors.map((item, index) => [
-            index + 1,
-            item[0],
-            item[1] === null ? "राशि अंकित नहीं" : money(item[1])
-        ]);
-
-        doc.autoTable({
-            startY: startY,
-            head: [["क्र.", "नाम", "राशि"]],
-            body: smallRows,
-            theme: "grid",
-            styles: { font: fontName, fontSize: 8, cellPadding: 2, textColor: [45, 36, 28] },
-            headStyles: { fillColor: [118, 106, 93], textColor: [255, 255, 255], fontStyle: "bold" },
-            columnStyles: { 0: { halign: 'center', cellWidth: 12 }, 1: { halign: 'left' }, 2: { halign: 'right', cellWidth: 35 } },
-            margin: { left: margin, right: margin }
-        });
-
-        startY = doc.lastAutoTable.finalY + 8;
-    }
-
-    // --- EXPENSES SECTION ---
-    doc.setFontSize(12);
+    doc.setFontSize(11);
     doc.setTextColor(122, 28, 28);
-    doc.text("पूरा खर्च विवरण", margin, startY);
+    doc.text("Poora Kharch Vivaran", margin, startY);
     startY += 4;
 
     let expenseRows = d.expenses.map((item, index) => [
@@ -1303,79 +1225,53 @@ async function downloadPDF(){
 
     doc.autoTable({
         startY: startY,
-        head: [["क्र.", "खर्च का विवरण", "राशि"]],
+        head: [["S.No.", "Expense Detail", "Amount"]],
         body: expenseRows,
         theme: "grid",
-        styles: { font: fontName, fontSize: 8, cellPadding: 2.2, textColor: [45, 36, 28] },
-        headStyles: { fillColor: [161, 68, 68], textColor: [255, 255, 255], fontStyle: "bold" },
+        styles: { font: fontName, fontSize: 8, cellPadding: 2, textColor: [45, 36, 28] },
+        headStyles: { fillColor: [161, 68, 68], textColor: [255, 255, 255] },
         columnStyles: { 0: { halign: 'center', cellWidth: 12 }, 1: { halign: 'left' }, 2: { halign: 'right', cellWidth: 35 } },
         margin: { left: margin, right: margin }
     });
 
     startY = doc.lastAutoTable.finalY + 6;
 
-    // Total expense row highlight
+    if(d.secret) {
+        if(startY > pageHeight - 35) { doc.addPage(); startY = 20; }
+        doc.setFillColor(252, 243, 243);
+        doc.setDrawColor(242, 214, 214);
+        doc.roundedRect(margin, startY, usableWidth, 14, 2, 2, "FD");
+        doc.setFontSize(9);
+        doc.setTextColor(122, 28, 28);
+        doc.text(`Gupt Daan: ${money(d.secret.amount)}  (${d.secret.names.join(", ")})`, margin + 6, startY + 9);
+        startY += 20;
+    }
+
+    if(startY > pageHeight - 50) { doc.addPage(); startY = 20; }
+    doc.setDrawColor(122, 28, 28);
+    doc.setFillColor(252, 249, 243);
+    doc.roundedRect(margin, startY, usableWidth, 22, 3, 3, "FD");
     doc.setFont(fontName, "bold");
     doc.setFontSize(10);
-    doc.setTextColor(161, 68, 68);
-    doc.text(`कुल खर्च: ${money(d.expensesTotal)}`, pageWidth - margin, startY, { align: "right" });
-    startY + 10;
-
-    // --- FINAL ACCOUNTING BOX ---
-    if(startY > pageHeight - 55) {
-        doc.addPage();
-        startY = 20;
-    }
-
-    doc.setDrawColor(122, 28, 28);
-    doc.setDrawWeight(1);
-    doc.setFillColor(252, 249, 243);
-    doc.roundedRect(margin, startY, usableWidth, 26, 3, 3, "FD");
-
-    doc.setFont(fontName, "bold");
-    doc.setFontSize(11);
     doc.setTextColor(122, 28, 28);
-    doc.text("अंतिम हिसाब", margin + 8, startY + 7);
-
+    doc.text("Antim Hisaab", margin + 8, startY + 6);
     doc.setFontSize(9);
     doc.setTextColor(45, 36, 28);
-    doc.text(`कुल प्राप्त चंदा: ${money(d.received)}    |    कुल खर्च: ${money(d.expensesTotal)}`, margin + 8, startY + 14);
-    
-    doc.setFontSize(11);
-    doc.setTextColor(122, 28, 28);
-    doc.text(`शेष राशि (अन्य छोटे-मोटे खर्चे सुरक्षित): ${money(d.balance)}`, margin + 8, startY + 21);
+    doc.text(`Received: ${money(d.received)}   |   Expense: ${money(d.expensesTotal)}   |   Balance: ${money(d.balance)}`, margin + 8, startY + 14);
 
-    startY += 32;
+    startY += 28;
 
-    // --- IMPORTANT NOTE ---
-    if(d.note) {
-        if(startY > pageHeight - 40) { doc.addPage(); startY = 20; }
-        doc.setFont(fontName, "bold");
-        doc.setFontSize(10);
-        doc.setTextColor(122, 28, 28);
-        doc.text("महत्वपूर्ण नोट:", margin, startY);
-        startY += 5;
-
-        doc.setFont(fontName, "normal");
-        doc.setFontSize(9);
-        doc.setTextColor(45, 36, 28);
-        const splitNote = doc.splitTextToSize(d.note, usableWidth);
-        doc.text(splitNote, margin, startY);
-        startY += (splitNote.length * 5) + 6;
-    }
-
-    // --- COMMITTEE SECTION ---
     if(startY > pageHeight - 35) { doc.addPage(); startY = 20; }
     doc.setFont(fontName, "bold");
-    doc.setFontSize(11);
+    doc.setFontSize(10);
     doc.setTextColor(122, 28, 28);
-    doc.text("प्रमुख व्यक्ति एवं समिति", margin, startY);
+    doc.text("Pramukh Vyakti Evam Samiti", margin, startY);
     startY += 4;
 
     let committeeRows = d.committee.map(item => [item[0], item[1]]);
     doc.autoTable({
         startY: startY,
-        head: [["पद", "नाम"]],
+        head: [["Role", "Name"]],
         body: committeeRows,
         theme: "grid",
         styles: { font: fontName, fontSize: 8, cellPadding: 2, textColor: [45, 36, 28] },
@@ -1383,51 +1279,31 @@ async function downloadPDF(){
         margin: { left: margin, right: margin }
     });
 
-    // Add running headers & footers across all generated pages accurately
     const totalPages = doc.internal.getNumberOfPages();
     for (let i = 1; i <= totalPages; i++) {
         doc.setPage(i);
         addHeaderFooter(i, totalPages);
     }
 
-    // --- PDF SHARE / DOWNLOAD HANDLER ---
     const pdfOutput = doc.output("blob");
     const pdfFile = new File([pdfOutput], `Shri-Jankeshwar-Mahadev-${currentYear}.pdf`, { type: "application/pdf" });
     
     if(navigator.canShare && navigator.canShare({ files: [pdfFile] })){
         try {
             await navigator.share({
-                title: `${d.title} — ऑफिशियल आय व्यय रिपोर्ट`,
-                text: `श्री जनकेश्वर महादेव ${currentYear} की आधिकारिक आय-व्यय रिपोर्ट PDF देखें।`,
+                title: `${d.title} — Official Report`,
+                text: `Shri Jankeshwar Mahadev ${currentYear} Report PDF.`,
                 files: [pdfFile]
             });
-            showToast("PDF सफलतापूर्वक शेयर हो गई");
+            showToast("PDF शेयर हो गई");
             return;
         } catch(err) {
             if(err.name !== "AbortError") console.log("Share skipped", err);
         }
     }
 
-    // Fallback direct download
     doc.save(`Shri-Jankeshwar-Mahadev-${currentYear}.pdf`);
-    showToast("PDF सफलतापूर्वक डाउनलोड हो गई");
-}
-
-function getImageData(src){
-    return new Promise((resolve,reject)=>{
-        const img = new Image();
-        img.crossOrigin = "Anonymous";
-        img.onload=()=>{
-            const canvas = document.createElement("canvas");
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0);
-            resolve(canvas.toDataURL("image/jpeg", .9));
-        };
-        img.onerror = reject;
-        img.src = src + "?v=" + Date.now();
-    });
+    showToast("PDF तैयार हो गई");
 }
 
 function showToast(text){
